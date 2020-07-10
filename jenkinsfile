@@ -10,9 +10,12 @@ pipeline{
                sh label: '', script: 'git clone https://github.com/vaddeadiseshu/microservices-demo.git'
 
             }
+            stage("building code"){
+                sh label: '', script: 'maven clean package'
+            }
             post{
                 always{
-                    echo "========always========"
+                    echo "this is a post action in code downloding"
                 }
                 success{
                     echo "========A executed successfully========"

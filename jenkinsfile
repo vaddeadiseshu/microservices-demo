@@ -1,40 +1,27 @@
 pipeline{
     agent any 
+
     triggers {
         cron('*/1 * * * *')
     }
+
     stages{
-        stage("code downloding"){
-            steps{
+        stage("code downloding")
+        {
+            step
+            {
                
                sh label: '', script: 'git clone https://github.com/vaddeadiseshu/microservices-demo.git'
-
-            }
-        stage("building code"){
+           }     
+        }
+        stage("building code")
+        {
+            step
+            {
                 sh label: '', script: 'maven clean package'
             }
-            post{
-                always{
-                    echo "this is a post action in code downloding"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
+                
         }
     }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
-        }
-    }
+    
 }

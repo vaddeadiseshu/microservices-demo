@@ -1,27 +1,38 @@
-pipeline{
+pipeline
+{
     agent any 
-
-    triggers {
+    triggers 
+    {
         cron('*/1 * * * *')
     }
 
-    stages{
-        stage("code downloding")
+    stages
+    {
+        stage("SCM")
         {
-            step
+            steps
             {
-               
                sh label: '', script: 'git clone https://github.com/vaddeadiseshu/microservices-demo.git'
            }     
         }
-        stage("building code")
+        stage("BUILD")
         {
-            step
+            steps
             {
                 sh label: '', script: 'maven clean package'
             }
                 
         }
     }
-    
+    post{
+        always{
+            echo "====++++always++++===="
+        }
+        success{
+            echo "====++++only when successful++++===="
+        }
+        failure{
+            echo "====++++only when failed++++===="
+        }
+    }
 }

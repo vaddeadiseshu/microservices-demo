@@ -6,8 +6,9 @@ pipeline{
     stages{
         stage("code downloding"){
             steps{
-                echo "code is getting downloaded"
-                git 'https://github.com/vaddeadiseshu/microservices-demo.git'
+               
+               sh label: '', script: 'git clone https://github.com/vaddeadiseshu/microservices-demo.git'
+
             }
             post{
                 always{
